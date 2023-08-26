@@ -1,0 +1,12 @@
+env/
+bin/
+obj/
+
+.vscode/*
+
+*-old.*
+*.pyc
+**/__pycache__/
+.env
+.env.*
+media/

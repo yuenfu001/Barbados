@@ -1,0 +1,74 @@
+{% extends 'base/index.html' %} {% load crispy_forms_tags %} {% load static %}
+{% block content %}
+{% include "base/cnavbar.html" %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="text-center">
+        <img
+          src="{{orderdetails.driver_info.profile_pic.url}}"
+          alt="Profile Image"
+          class="img-fluid rounded-circle mb-3"
+          style="width: 150px; height: 150px"
+        />
+        <p>Driver's Name: {{orderdetails.driver_info.fullname}}</p>
+        <p>ID Type: {{orderdetails.driver_info.id_type}}</p>
+        <p>ID Number: {{orderdetails.driver_info.id_number}}</p>
+        <p>Phone: {{orderdetails.driver_info.phone_number}}</p>
+        <p>Location: City, Country</p>
+
+        <h4>ASSIGNED VEHICLE</h4>
+        <p>BL Number: {{orderdetails.driver_info.assigned_truck.bl_number}}</p>
+        <p>
+          Plate Number: {{orderdetails.driver_info.assigned_truck.plate_number|upper}}
+        </p>
+      </div>
+
+      {% comment %}
+      <div class="col-md-3"></div>
+      {% endcomment %}
+    </div>
+    <div class="col-md-6">
+      <h4>COMPANY INFORMATION</h4>
+      <p>Company Name: {{orderdetails.company_name}}</p>
+      <p>CAC Reg No: {{orderdetails.cac_no}}</p>
+      
+      <hr />
+
+      <h4>COMPANY'S REPRESENTATIVE INFORMATION</h4>
+      <p>Repsentative Name: {{orderdetails.fullname}}</p>
+      <p>
+        Repsentative Number: {{orderdetails.phone_number}}
+      </p>
+
+      <hr />
+      <h4>CONSIGNMENT DETAILS</h4>
+      <p>
+        Consignment Type: {{orderdetails.con_type}}
+      </p>
+      <p>Weight: {{orderdetails.weight}} tons</p>
+      <hr />
+
+      <h4>LOGISTICS DETAILS</h4>
+      <p>
+        Take-off Location: {{orderdetails.take_off_location|title}}
+      </p>
+      <p>Destination: {{orderdetails.destination|title}} </p>
+      <hr />
+    </div>
+  </div>
+</div>
+<div class="text-center mt-3">
+  <button class="btn btn-outline-warning" id="print-button">Print</button>
+  <a class="btn btn-outline-primary" href="{% url 'orders:updatecompanyorder' pk=orderdetails.pk %}">Update Order</a>
+</div>
+
+<script>
+  document
+    .getElementById("print-button")
+    .addEventListener("click", function () {
+      window.print();
+    });
+</script>
+
+{% endblock %}

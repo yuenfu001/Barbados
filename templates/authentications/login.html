@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+
+{% comment %} {% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+ 
+
+{% if next %}
+    {% if user.is_authenticated  %}
+     <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <p>Please login to see this page.</p>
+   
+    {% endif %}
+
+{% endif %} {% endcomment %}
+    <form method = "POST" action="{% url 'account:login' %}">
+        {% csrf_token %}
+
+            <br>
+            {{form|crispy}} <br>
+       <input class="btn btn-outline-primary" type="submit" value="Save" />
+    </form>
+    <br>
+    {% comment %} <p><a href="#">Lost password?</a></p> {% endcomment %}
+ 
+{% endblock %}

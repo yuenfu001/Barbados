@@ -1,0 +1,6 @@
+{% extends 'base/index.html' %}
+{% block content %}
+<h2>Error</h2>
+<p>{{ msg }}</p>
+<p><a href="{% url 'drivers:displaydriver' %}">Go back to driver list</a></p>
+{% endblock %}

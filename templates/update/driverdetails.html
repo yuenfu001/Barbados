@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %} 
+{% load crispy_forms_tags %} 
+
+
+{% block content %}
+{% include "base/dnavbar.html" %}<br>
+<form method="POST" enctype="multipart/form-data">
+<br>
+  {% csrf_token %} 
+  {{ updatedriver|crispy }}<br>
+  <input class="btn btn-outline-primary" type="submit" value="Update" />
+</form>
+{% endblock %}

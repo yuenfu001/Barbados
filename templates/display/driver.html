@@ -1,0 +1,50 @@
+{% extends 'base/index.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+<style>
+.table td,
+    .table th {
+        font-size: 12px; /* Adjust the font size as needed */
+    }
+</style>
+{% include "base/dnavbar.html" %}<br>
+<div class="table-responsive">
+    
+         <br>
+     <table class = 'table table-bordered table-striped'>
+        <thead class = 'table-light'>
+            <tr>
+            <th class = "text-center">S/N</th>
+            <th class = "text-center">DRIVER NAME</th>
+            <th class = "text-center">PHONE NUMBER</th>
+            <th class = "text-center">ID TYPE</th> 
+            <th class = "text-center">ID NUMBER</th> 
+            <th class = "text-center">TRUCK NUMBER</th> 
+            <th class = "text-center">PLATES NUMBER</th>
+            {% if request.user.is_superuser %} 
+            <th class = "text-center">DELETE</th>
+            {% endif %} 
+            </tr>
+        </thead>
+        
+        {%for driver in alldriver %}
+        {% comment %} {{item.item_name}} has this quantity: {{item.quantity}}<br> {% endcomment %}
+        <tr>
+            <td class = "text-center">{{forloop.counter}}</td>
+            <td class = "text-center"><a href="{% url 'drivers:driverdetails' driver.id %}">{{driver.fullname|title}}</a></td>
+            <td class = "text-center"><a href="#">{{driver.phone_number}}</a></td>
+            <td class = "text-center"><a href="#">{{driver.id_type}}</a></td>
+            <td class = "text-center"><a href="#">{{driver.id_number}}</a></td>
+            <td class = "text-center"><a href="#">{{driver.assigned_truck.bl_number|upper}}</a></td>
+            <td class = "text-center"><a href="#">{{driver.assigned_truck.plate_number|upper}}</a></td>
+            {% if request.user.is_superuser %} 
+            <td class = "text-center"><a href="{% url 'drivers:deletedriver' driver.id %}"><img src="{% static 'img/del.jpg' %}" height= "20" width="20"></a></td>
+            {% endif %} 
+        </tr>
+        {%endfor%}
+        
+        </table>
+    </div>
+{% endblock %}

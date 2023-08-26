@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "barbados"
+version = "0.1.0"
+description = "this is a logstics project"
+authors = ["yuenfu001 <liuyuenfu@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.4"
+pillow = "^10.0.0"
+black = "^23.7.0"
+psycopg2 = "^2.9.7"
+django-crispy-forms = "1.9.0"
+djangorestframework = "^3.14.0"
+python-decouple = "^3.8"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

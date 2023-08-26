@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+{% include "base/cnavbar.html" %} 
+    <form method = "POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+            <br>
+            {{trip|crispy}} <br>
+       <input class="btn btn-outline-primary" type="submit" value="Save" />
+    </form>
+    <br>
+    
+{% endblock %}

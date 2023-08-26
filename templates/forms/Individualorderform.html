@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %} 
+{% load crispy_forms_tags %} 
+
+
+
+{% block content %}
+{% include "base/inavbar.html" %} 
+<form method="POST" action="">
+<br>
+  {% csrf_token %}
+  {{ individualorder|crispy }}<br>
+  <input class="btn btn-outline-primary" type="submit" value="Save" />
+  <br>
+</form>
+{% endblock %}

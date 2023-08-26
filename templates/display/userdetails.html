@@ -1,0 +1,30 @@
+{% extends 'base/index.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+{% include "base/registrynavbar.html" %}<br>
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="text-center">
+        
+        {% comment %} <img src="{{details.profile_pic.url}}" alt="Profile Image" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px;"> {% endcomment %}
+          <h4>Email: {{details.email}}</h4>
+          <h4>Username: {{details.username}}</h4>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <h3>Driver's Information</h3>
+        {% comment %} <p> ID Type: {{details.id_type}}</p>
+        <p> ID Number: {{details.id_number}}</p>
+        <p>Phone: {{details.phone_number}}</p> {% endcomment %}
+        <h3>Assigned Vehicle</h3>
+        {% comment %} <p>BL Number: {{details.assigned_truck.bl_number}}</p>
+        <p>BL Number: {{details.assigned_truck.plate_number}}</p> {% endcomment %}
+      <a class="btn btn-outline-primary" href="{% url 'account:updateuser' pk=details.pk %}">Update User Information</a>
+      </div>
+    </div>
+</div>
+        
+
+{% endblock %}

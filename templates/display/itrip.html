@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+{% include "base/inavbar.html" %} 
+    <div class="table responsive">
+    
+         <br>
+     <table class = 'table table-bordered table-striped'>
+        <thead class = 'table-light'>
+            <tr>
+            <th class = "text-center">S/N</th>
+            <th class = "text-center">TRIP NUMBER</th>
+            <th class = "text-center">PROPOSAL</th>
+            {% if request.user.is_superuser %}
+            <th class = "text-center">DELETE</th>
+            {% endif %}
+            </tr>
+        </thead>
+        
+        {%for item in iadded %}
+        {% comment %} {{item.item_name}} has this quantity: {{item.quantity}}<br> {% endcomment %}
+        <tr>
+            <td class = "text-center">{{forloop.counter}}</td>
+            <td class = "text-center"><a href="#">{{item.Trip_no|upper}}</a></td>
+            <td class = "text-center"><a href="#">{{item.proposal}}</a></td>
+            {% if request.user.is_superuser %}
+            <td class = "text-center"><a href=""><img src="{% static 'img/del.jpg' %}" height= "20" width="20"></a></td>
+            {% endif %}
+        </tr>
+        {%endfor%}
+        
+        </table>
+    </div>
+{% endblock %}
