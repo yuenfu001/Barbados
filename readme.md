@@ -19,8 +19,8 @@ Installation
 
     bash
 
-git clone https://github.com/yourusername/trucking-management-system.git
-cd trucking-management-system
+git clone https://github.com/yuenfu001/Barbados
+cd Barbados
 
 Create a virtual environment (optional but recommended):
 
