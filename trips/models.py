@@ -8,6 +8,10 @@ class IndividualTrips(models.Model):
     date = models.DateField(auto_now_add=True)
     proposal = models.FileField(upload_to="proposals/")
 
+    class Meta:
+        verbose_name = "Individual Trip"
+        verbose_name_plural = "Individual Trips"
+
     @property
     def Trip_no(self):
         return f"{self.name}/{self.id}/{self.initials}/{self.date}"
@@ -21,6 +25,10 @@ class CompanyTrips(models.Model):
     initials =  models.CharField(max_length=5, help_text="Enter Company Name Initials")
     date = models.DateField(auto_now_add=True)
     proposal = models.FileField(upload_to="proposals/")
+
+    class Meta:
+        verbose_name = "Individual Trip"
+        verbose_name_plural = "Individual Trips"
 
     @property
     def Trip_no(self):

@@ -1,0 +1,25 @@
+#yml is a data serialization languages that is ready
+#english like
+
+version: '3.8'
+
+services:
+ app:
+  build: .
+  volumes:
+   - .:/django
+  ports:
+   - 8000:8000
+  image: app:django
+  container_name: my_first_django_container
+  command: python manage.py runserver 0.0.0.0:8000
+
+
+
+
+
+
+
+
+
+

@@ -36,16 +36,16 @@
         <tr>
             <td class = "text-center">{{order.date_added|date:"d-M-y"}}</td>
             <td class = "text-center"><a href="{% url 'orders:individualorderdetail' order.id %}">{{order.fullname}}</a></td>
-            <td class = "text-center"><a href="#">{{order.phone_number}}</a></td>
-            <td class = "text-center"><a href="#">{{order.id_type}}</a></td>
-            <td class = "text-center"><a href="#">{{order.id_number}}</a></td>
-            <td class = "text-center"><a href="#">{{order.driver_info.fullname|title}}</a></td>
-            <td class = "text-center"><a href="#">{{order.weight}}</a></td>
-            <td class = "text-center"><a href="#">{{order.con_type|title}}</a></td>
-            <td class = "text-center"><a href="#">{{order.take_off_location|title}}</a></td>
-            <td class = "text-center"><a href="#">{{order.destination|title}}</a></td>
+            <td class = "text-center">{{order.phone_number}}</td>
+            <td class = "text-center">{{order.id_type}}</td>
+            <td class = "text-center">{{order.id_number}}</td>
+            <td class = "text-center">{{order.driver_info.fullname|title}}</td>
+            <td class = "text-center">{{order.weight}}</td>
+            <td class = "text-center">{{order.con_type|title}}</td>
+            <td class = "text-center">{{order.take_off_location|title}}</td>
+            <td class = "text-center">{{order.destination|title}}</td>
             {% if request.user.is_superuser %}
-            <td class = "text-center"><a href="{% url 'orders:idelete' order.id %}"><img src="{% static 'img/del.jpg' %}" height= "20" width="20"></a></td>
+            <td class = "text-center"><a href="{% url 'orders:idelete' order.id %}"><img src="{% static 'img/del.jpg' %}" height= "20" width="20"></td>
             {% endif %}
         </tr>
         {%endfor%}

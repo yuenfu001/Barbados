@@ -29,22 +29,40 @@
             </tr>
         </thead>
         
-        {%for driver in alldriver %}
+        {%for serial_number, driver in items %}
         {% comment %} {{item.item_name}} has this quantity: {{item.quantity}}<br> {% endcomment %}
         <tr>
-            <td class = "text-center">{{forloop.counter}}</td>
+            <td class = "text-center">{{ serial_number }}</td>
             <td class = "text-center"><a href="{% url 'drivers:driverdetails' driver.id %}">{{driver.fullname|title}}</a></td>
-            <td class = "text-center"><a href="#">{{driver.phone_number}}</a></td>
-            <td class = "text-center"><a href="#">{{driver.id_type}}</a></td>
-            <td class = "text-center"><a href="#">{{driver.id_number}}</a></td>
-            <td class = "text-center"><a href="#">{{driver.assigned_truck.bl_number|upper}}</a></td>
-            <td class = "text-center"><a href="#">{{driver.assigned_truck.plate_number|upper}}</a></td>
+            <td class = "text-center">{{driver.phone_number}}</td>
+            <td class = "text-center">{{driver.id_type}}</td>
+            <td class = "text-center">{{driver.id_number}}</td>
+            <td class = "text-center">{{driver.assigned_truck.bl_number|upper}}</td>
+            <td class = "text-center">{{driver.assigned_truck.plate_number|upper}}</td>
             {% if request.user.is_superuser %} 
-            <td class = "text-center"><a href="{% url 'drivers:deletedriver' driver.id %}"><img src="{% static 'img/del.jpg' %}" height= "20" width="20"></a></td>
+            <td class = "text-center"><a href="{% url 'drivers:deletedriver' driver.id %}"><img src="{% static 'img/del.jpg' %}" height= "20" width="20"></td>
             {% endif %} 
         </tr>
         {%endfor%}
         
         </table>
     </div>
+    <span class="current">
+        Page {{ page.number }} of {{ page.paginator.num_pages }}
+    </span>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+        {% if page.has_previous %}
+          <li class="page-item"><a class="page-link" href="{% url 'drivers:displaydriver' %}?page={{ page.previous_page_number }}">Previous</a></li>
+        {% endif %}
+        {% for i in page.paginator.page_range %}
+        <li class="page-item {% if page.number == i %}active{% endif %}">
+            <a class="page-link" href="{% url 'drivers:displaydriver' %}?page={{ i }}">{{ i }}</a>
+        </li>
+        {% endfor %}
+          {% if page.has_next %}
+          <li class="page-item"><a class="page-link" href="{% url 'trucks:truck' %}?page={{ page.next_page_number }}">Next</a></li>
+          {% endif %}
+        </ul>
+      </nav>
 {% endblock %}

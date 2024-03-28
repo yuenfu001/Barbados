@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+{% include "base/inavbar.html" %} 
+    <div class="table responsive">
+    
+         <br>
+     <table class = 'table table-bordered table-striped'>
+        <thead class = 'table-light'>
+            <tr>
+            <th class = "text-center">S/N</th>
+            <th class = "text-center">TRIP NO.</th>
+            
+            <th class = "text-center">CON TYPE</th>
+            <th class = "text-center">WEIGHT</th>
+            <th class = "text-center">DRIVER</th>
+            <th class = "text-center">TRUCK</th>
+            <th class = "text-center">VIEW</th>
+          
+            </tr>
+        </thead>
+        
+        {%for i in iorder %}
+        {% comment %} {{item.item_name}} has this quantity: {{item.quantity}}<br> {% endcomment %}
+        <tr>
+            <td class = "text-center">{{forloop.counter}}</td>
+            <td class = "text-center">{{i.trip_no}}</td>
+            
+            <td class = "text-center">{{i.con_type}}</td>
+            <td class = "text-center">{{i.weight}}</td>
+            <td class = "text-center">{{i.driver_info.fullname}}</td>
+            <td class = "text-center">{{i.driver_info.assigned_truck.bl_number}}</td>
+            <td class = "text-center"><a href="{% url 'trips:iprint' i.id %}" class="btn btn-outline-success">Print</a></td>
+            
+        </tr>
+        {%endfor%}
+        
+        </table>
+    </div>
+{% endblock %}
