@@ -8,8 +8,6 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='account:login')
 def home(request):
     title = "Home Page"
-
-    
     companyorder = OrderCompany.objects.all().count()
     individualorder = OrderIndividual.objects.all().count()
     companytrips = CompanyTrips.objects.all().count()

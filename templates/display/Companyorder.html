@@ -30,17 +30,17 @@
             </tr>
         </thead>
         
-        {%for order in vieworders %}
+        {% for order in vieworders %}
         {% comment %} {{item.item_name}} has this quantity: {{item.quantity}}<br> {% endcomment %}
         <tr>
             <td class = "text-center">{{forloop.counter}}</td>
             <td class = "text-center"><a href="{% url 'orders:companyorderdetail' order.id %}">{{order.company_name}}</a></td>
-            <td class = "text-center"><a href="#">{{order.cac_no}}</a></td>
-            <td class = "text-center"><a href="#">{{order.driver_info.fullname|title}}</a></td>
-            <td class = "text-center"><a href="#">{{order.weight}}</a></td>
-            <td class = "text-center"><a href="#">{{order.con_type|title}}</a></td>
-            <td class = "text-center"><a href="#">{{order.take_off_location|title}}</a></td>
-            <td class = "text-center"><a href="#">{{order.destination|title}}</a></td>
+            <td class = "text-center">{{order.cac_no}}</td>
+            <td class = "text-center">{{order.driver_info.fullname|title}}</td>
+            <td class = "text-center">{{order.weight}} tons</td>
+            <td class = "text-center">{{order.con_type|title}}</td>
+            <td class = "text-center">{{order.take_off_location|title}}</td>
+            <td class = "text-center">{{order.destination|title}}</td>
             <td class = "text-center">{{order.date_joined|date:"d-M-y"}}</td>
             {% if request.user.is_superuser %}
             <td class = "text-center"><a href="{% url 'orders:cdelete' order.id %}"><img src="{% static 'img/del.jpg' %}" height= "20" width="20"></a></td>

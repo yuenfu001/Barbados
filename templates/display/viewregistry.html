@@ -43,9 +43,9 @@
         <a href="{% url 'account:userdetails' user.id %}">{{user.username|title}}</a>
       </td>
       <td class="text-center">
-        <a href="#">{{user.first_name|title}} {{user.last_name|title}}</a>
+        {{user.first_name|title}} {{user.last_name|title}}
       </td>
-      <td class="text-center"><a href="#">{{user.email|title}}</a></td>
+      <td class="text-center">{{user.email|title}}</td>
       <td class="text-center">
         {% if user.is_staff %}
         <span class="colorful-tick">&#x2713;</span>

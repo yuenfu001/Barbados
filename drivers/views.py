@@ -1,5 +1,6 @@
 from .models import *
 from .forms import *
+from django.core.paginator import Paginator
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from orders.models import *
@@ -10,7 +11,8 @@ from account.decorators import admin_required
 
 # Create your views here.
 
-@login_required(login_url='account:login')
+
+@login_required(login_url="account:login")
 @staff_member_required(login_url="base:index")
 def AddDriver(request):
     title = "Add Driver"
@@ -31,18 +33,35 @@ def AddDriver(request):
     return render(request, "forms/driver_form.html", context)
 
 
-@login_required(login_url='account:login')
+@login_required(login_url="account:login")
 @staff_member_required(login_url="base:index")
 def ViewDriver(request):
     title = "View Driver"
-    param_value = request.GET.get('param_name')
-    queryset = DriverInfo.objects.all()
+    param_value = request.GET.get("param_name")
+    queryset = DriverInfo.objects.all().order_by("id")
+    paginator = Paginator(queryset, 10)
+    page_number = request.GET.get("page")
+    page = paginator.get_page(page_number)
+    serial_numbers = list(
+        range(
+            (page.number - 1) * page.paginator.per_page + 1,
+            min(page.number * page.paginator.per_page, page.paginator.count) + 1,
+        )
+    )
 
-    context = {"alldriver": queryset, "title": title}
+    # Combine serial numbers and items into a list of tuples
+    items_with_serial_numbers = zip(serial_numbers, page)
+
+    context = {
+        "alldriver": queryset,
+        "title": title,
+        "page": page,
+        "items": items_with_serial_numbers,
+    }
     return render(request, "display/driver.html", context)
 
 
-@login_required(login_url='account:login')
+@login_required(login_url="account:login")
 @staff_member_required(login_url="base:index")
 def DriverDetails(request, pk):
     title = "Driver Details"
@@ -52,23 +71,20 @@ def DriverDetails(request, pk):
     return render(request, "display/driverdetails.html", context)
 
 
-
-@login_required(login_url='account:login')
+@login_required(login_url="account:login")
 @staff_member_required(login_url="base:index")
-def UpdateDriver(request,pk):
+def UpdateDriver(request, pk):
     title = "Update Driver"
     queryset = DriverInfo.objects.all()
     query = DriverInfo.objects.get(id=pk)
     update = DriverUpdate(request.POST or None, request.FILES or None, instance=query)
     if request.method == "POST":
         if update.is_valid():
-            
-                update.save()
-                messages.success(request, "Update successful")
-                return redirect("drivers:driverdetails", pk=pk)
+            update.save()
+            messages.success(request, "Update successful")
+            return redirect("drivers:driverdetails", pk=pk)
     context = {"updatedriver": update, "title": title}
     return render(request, "update/driverdetails.html", context)
-
 
 
 # handle foreignkey that is protected
@@ -80,21 +96,19 @@ def DeleteDriver(request, delete):
         query = DriverInfo.objects.get(id=delete)
         if request.method == "POST":
             query.delete()
-            messages.success(request,"Successfully Deleted")
+            messages.success(request, "Successfully Deleted")
             return redirect("drivers:displaydriver")
-        context ={
-                "tags":tag, "title":title
-        }
+        context = {"tags": tag, "title": title}
         return render(request, "delete/driverdelete.html", context)
-        
+
     except ProtectedError as e:
         protected_references = []
         for i in e.protected_objects:
             if isinstance(i, OrderCompany):
                 protected_references.append(f"{i.trip_no}")
-        error_message = f"This driver can't be deleted as he is used in a particular Order: " + ", ".join(protected_references)
-        context ={
-             "msg":error_message
-        }
-        return render(request,"display/drivererror.html", context)
-
+        error_message = (
+            f"This driver can't be deleted as he is used in a particular Order: "
+            + ", ".join(protected_references)
+        )
+        context = {"msg": error_message}
+        return render(request, "display/drivererror.html", context)

@@ -23,15 +23,17 @@
           {% comment %} <li class="nav-item">
             <a class="nav-link" href="#">Add Category</a>
           </li> {% endcomment %}
-          
-            
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{% url 'orders:viewcompanyorder' %}">Company</a>
-            </li>
-            
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{% url 'orders:viewindividualorder' %}">Individual</a>
-            </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Make an Order
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'orders:viewcompanyorder' %}">Company</a></li>
+              {% comment %} <li><a class="dropdown-item" href="{% url 'orders:viewindividualorder' %}">Individual</a></li> {% endcomment %}
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'orders:viewindividualorder' %}">Individual</a></li>
+            </ul>
+          </li>
             {% if user.is_superuser %}
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{% url 'account:registry' %}">Users</a>
