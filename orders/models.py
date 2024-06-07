@@ -8,7 +8,7 @@ class OrderCompany(Name):
     CLIENT_TYPE = (("C", "Company"),)
     client_type = models.CharField(max_length=15, choices=CLIENT_TYPE, default="I")
     company_name = models.CharField(max_length=100, blank=False, null=True)
-    cac_no = models.CharField(max_length=10, blank=True, null=True)
+    cac_no = models.CharField(max_length=8, blank=True, null=True)
     trip_no = models.ForeignKey(CompanyTrips, on_delete=models.PROTECT)
     driver_info = models.ForeignKey(DriverInfo, on_delete=models.SET_NULL, null=True)
     weight = models.DecimalField(max_digits=4, decimal_places=2)
@@ -19,8 +19,8 @@ class OrderCompany(Name):
     date_modified = models.DateField(auto_now=True)
 
     class Meta:
-        verbose_name = "CompanyOrder"
-        verbose_name_plural = "CompanyOrders"
+        verbose_name = "Company Order"
+        verbose_name_plural = "Company Orders"
         ordering = ["company_name"]
 
 
@@ -41,8 +41,8 @@ class OrderIndividual(Name):
     date_modified = models.DateField(auto_now=True)
 
     class Meta:
-        verbose_name = "IndividualOrder"
-        verbose_name_plural = "IndividualOrders"
+        verbose_name = "Individual Order"
+        verbose_name_plural = "Individual Orders"
 
     
     def __str__(self):

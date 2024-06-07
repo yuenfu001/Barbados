@@ -40,7 +40,7 @@
     </div>
 </div>
 <div class="text-center mt-3">
-  <button class="btn btn-outline-warning" id="print-button">Print</button>
+  {% comment %} <button class="btn btn-outline-warning" id="print-button">Print</button> {% endcomment %}
   <a class="btn btn-outline-primary" href="{% url 'orders:updateindividualorder' pk=orderdetails.pk %}">Update Order</a>
 </div>
 

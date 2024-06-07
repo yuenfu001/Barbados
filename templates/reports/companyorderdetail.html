@@ -59,16 +59,15 @@
   </div>
 </div>
 <div class="text-center mt-3">
-  <button class="btn btn-outline-warning" id="print-button">Print</button>
   <a class="btn btn-outline-primary" href="{% url 'orders:updatecompanyorder' pk=orderdetails.pk %}">Update Order</a>
 </div>
 
-<script>
+{% comment %} <script>
   document
     .getElementById("print-button")
     .addEventListener("click", function () {
       window.print();
     });
-</script>
+</script> {% endcomment %}
 
 {% endblock %}

@@ -71,7 +71,7 @@ def AddIndivdualOrder(request):
         if form.is_valid():
             form.save()
             messages.success(request, "New Order added")
-        return redirect("orders:viewindividualorder")
+            return redirect("orders:viewindividualorder")
     context = {"individualorder": form, "allorders": queryset, "title": title}
     return render(request, "forms/individualorderform.html", context)
 
@@ -144,4 +144,7 @@ def DeleteCOrder(request,pk):
             return redirect("orders:viewindividualorder")
     context = {"updateorder": delete, "title": title, "tags":tag}
     return render(request,"delete/deletecorder.html", context)
+
+
+
 

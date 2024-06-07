@@ -14,4 +14,5 @@ urlpatterns=[
     path('individualorderdetails/<str:pk>/', views.IndividualOrderDetails, name='individualorderdetail'),
     path('idelete/<str:pk>/', views.DeleteIOrder, name='idelete'),
     path('cdelete/<str:pk>/', views.DeleteCOrder, name='cdelete'),
+    
 ]
