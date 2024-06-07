@@ -11,6 +11,12 @@ class CreateLoginView(LoginView):
     template_name = "authentications/login.html"
     authentication_form = LoginForm
 
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            # If user is authenticated, redirect them to another page
+            return redirect('base:index')  # Adjust the URL as per your project
+        return super().dispatch(request, *args, **kwargs)
+
 @admin_required
 def Registration(request):
     register = RegisterForm(request.POST or None)
@@ -61,8 +67,9 @@ def UserDetails(request, pk):
     }
     return render(request, "display/userdetails.html", context)
 
+@admin_required
 def DeleteUser(request, pk):
-    title = "Delete Ueer"
+    title = "Delete User"
     user = get_object_or_404(User, id=pk)
     tag = f"Are you sure you want to delete this user: {user.username} ?"
     if request.method == "POST":

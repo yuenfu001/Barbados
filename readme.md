@@ -17,39 +17,39 @@ Installation
 
     Clone the repository:
 
-    bash
+    cmd/powershell
 
-git clone https://github.com/yourusername/trucking-management-system.git
-cd trucking-management-system
+git clone https://github.com/yuenfu001/Barbados
+cd Barbados
 
 Create a virtual environment (optional but recommended):
 
-bash
+cmd/powershell
 
 python3 -m venv venv
-source venv/bin/activate
+activate your virtual Environment
 
 Install dependencies:
 
-bash
+cmd/powershell
 
 pip install -r requirements.txt
 
 Run migrations:
 
-bash
+cmd/powershell
 
 python manage.py migrate
 
 Create a superuser:
 
-bash
+cmd/powershell
 
 python manage.py createsuperuser
 
 Run the development server:
 
-bash
+cmd/powershell
 
     python manage.py runserver
 

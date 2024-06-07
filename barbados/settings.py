@@ -26,8 +26,12 @@ SECRET_KEY = config("FUNC")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG")
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = ["*",".vercel.app"]
 # ALLOWED_HOSTS = ["localhost", "192.168.137.1", "127.0.0.1","192.168.1.140","barbados.com","10.0.0.125"]
+=======
+ALLOWED_HOSTS = ["localhost", "192.168.137.1", "127.0.0.1","192.168.1.140","barbados.com","10.0.0.125"]
+>>>>>>> 6235154fcbf8b3c0b1ff94faeaab022ca4c45110
 DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"  # use the apprropriate storage for backend here
 
 # Application definition
@@ -103,10 +107,22 @@ WSGI_APPLICATION = "barbados.wsgi.application"
 # }
 DATABASES = {
     "default": {
+        # "ENGINE": "django.db.backends.postgresql",
+        # "NAME": "Barbados",
+        # "USER": "postgres",
+        # "PASSWORD": "5773",
+        # "HOST": "localhost",
+        # "PORT":"5432",
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
 
 
 # Password validation
